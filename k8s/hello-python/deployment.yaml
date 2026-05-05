@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: hello-python
-        image: lufertony/hello-python:1.0
+        image: lufertony/hello-python:2.0
         ports:
         - containerPort: 9999

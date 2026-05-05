@@ -9,3 +9,9 @@ admin
 
 senha:
 kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
+    powershell:
+        [System.Text.Encoding]::UTF8.GetString(
+        [System.Convert]::FromBase64String(
+            (kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}")
+        )
+        )        
