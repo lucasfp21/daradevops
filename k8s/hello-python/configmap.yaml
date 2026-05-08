@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: app-config
+data:
+  APP_NAME: "Aplicacao com configmap"
+  APP_AUTHOR: "Luqera"
+  APP_VERSION: "555"
