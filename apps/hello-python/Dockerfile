@@ -2,7 +2,7 @@ FROM python:3.9-slim
 
 WORKDIR /app
 
-COPY app.py .
+COPY app/app.py .
 
 EXPOSE 9999
 
