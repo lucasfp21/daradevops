@@ -5,4 +5,4 @@ metadata:
 data:
   APP_NAME: "Aplicacao com configmap"
   APP_AUTHOR: "Luqera"
-  APP_VERSION: "555"
+  APP_VERSION: "4.1"
