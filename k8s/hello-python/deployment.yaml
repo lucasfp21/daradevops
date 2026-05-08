@@ -15,9 +15,11 @@ spec:
     spec:
       containers:
       - name: hello-python
-        image: lufertony/hello-python:3.1
+        image: lufertony/hello-python:4.0
         ports:
         - containerPort: 9999
         envFrom:
         - configMapRef:
             name: app-config
+        - secretRef:
+            name: app-secret
