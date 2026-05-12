@@ -10,15 +10,12 @@ spec:
 
   rules:
   - host: argocd.local
-
     http:
       paths:
       - path: /
         pathType: Prefix
-
         backend:
           service:
             name: argocd-server
-
             port:
               number: 80
