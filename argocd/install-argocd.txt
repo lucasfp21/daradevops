@@ -15,3 +15,28 @@ kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.pas
             (kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}")
         )
         )        
+
+Depois DESABILITE o redirect HTTPS do Argo
+
+Execute:
+    kubectl edit configmap argocd-cmd-params-cm -n argocd
+
+Adicione:
+    data:
+    server.insecure: "true"
+
+Exemplo:
+
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+    name: argocd-cmd-params-cm
+
+    data:
+    server.insecure: "true"
+
+Reinicie o deployment
+    kubectl rollout restart deployment argocd-server -n argocd
+
+Acesse:
+    http://argocd.local
