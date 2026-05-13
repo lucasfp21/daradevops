@@ -26,12 +26,12 @@ kubectl apply -n argocd `
   --force-conflicts `
   -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
 
-Write-Host "Aguardando ArgoCD subir..."
+Write-Host "Aguardando ConfigMap do ArgoCD..."
 
-kubectl wait --for=condition=available `
-  deployment/argocd-server `
-  -n argocd `
-  --timeout=300s
+do {
+    Start-Sleep -Seconds 2
+    $cm = kubectl get configmap argocd-cmd-params-cm -n argocd --ignore-not-found
+} while (-not $cm)
 
 Write-Host "Habilitando modo insecure do ArgoCD..."
 
