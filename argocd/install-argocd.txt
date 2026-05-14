@@ -40,3 +40,16 @@ Reinicie o deployment
 
 Acesse:
     http://argocd.local
+
+Melhor prática pro seu lab
+
+Depois de criar cluster:
+
+k3d kubeconfig merge links --kubeconfig-switch-context
+
+e então substituir automaticamente no setup:
+
+(Get-Content $HOME\.kube\config) `
+  -replace 'host.docker.internal','127.0.0.1' |
+  Set-Content $HOME\.kube\config
+✅ Isso elimina MUITOS problemas chatos no Windows + k3d.
