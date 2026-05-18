@@ -40,7 +40,13 @@ Write-Host "=================================="
 Write-Host "Criando namespace do ArgoCD..."
 Write-Host "=================================="
 
-kubectl create namespace argocd
+kubectl create namespace argocd --dry-run=client -o yaml | kubectl apply -f -
+
+Write-Host ""
+Write-Host "=================================="
+Write-Host "Criando namespace do links..."
+Write-Host "=================================="
+kubectl apply -f infra/namespaces/links.yaml
 
 Write-Host ""
 Write-Host "=================================="
@@ -68,10 +74,7 @@ Write-Host "=================================="
 Write-Host "Habilitando modo insecure..."
 Write-Host "=================================="
 
-kubectl patch configmap argocd-cmd-params-cm `
-  -n argocd `
-  --type merge `
-  --patch "{\"data\":{\"server.insecure\":\"true\"}}"
+kubectl apply -f bootstrap/argocd-cmd-params.yaml
 
 Write-Host ""
 Write-Host "=================================="
@@ -84,12 +87,6 @@ kubectl rollout status deployment argocd-server `
   -n argocd `
   --timeout=300s
 
-Write-Host ""
-Write-Host "=================================="
-Write-Host "Aplicando infraestrutura..."
-Write-Host "=================================="
-
-kubectl apply -f infra/namespaces/links.yaml
 
 Write-Host ""
 Write-Host "=================================="
