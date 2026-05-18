@@ -13,6 +13,7 @@ spec:
 
         directories:
           - path: apps/*
+          - path: platform/*
 
   template:
     metadata:
