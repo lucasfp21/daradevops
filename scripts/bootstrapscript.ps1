@@ -23,6 +23,22 @@ k3d kubeconfig merge links --kubeconfig-switch-context
 
 Write-Host ""
 Write-Host "=================================="
+Write-Host "Corrigindo kubeconfig..."
+Write-Host "=================================="
+
+(Get-Content "$HOME\.kube\config") `
+  -replace 'host.docker.internal','127.0.0.1' |
+  Set-Content "$HOME\.kube\config"
+
+Write-Host ""
+Write-Host "=================================="
+Write-Host "Validando conexão com cluster..."
+Write-Host "=================================="
+
+kubectl cluster-info
+
+Write-Host ""
+Write-Host "=================================="
 Write-Host "Criando namespace do ArgoCD..."
 Write-Host "=================================="
 
