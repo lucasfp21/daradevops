@@ -29,7 +29,6 @@ spec:
 
       destination:
         server: https://kubernetes.default.svc
-        namespace: links
 
       syncPolicy:
         automated:
