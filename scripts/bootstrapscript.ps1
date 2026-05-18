@@ -70,18 +70,10 @@ Write-Host "=================================="
 Write-Host "Habilitando modo insecure..."
 Write-Host "=================================="
 
-$patch = @'
-{
-  "data": {
-    "server.insecure": "true"
-  }
-}
-'@
-
 kubectl patch configmap argocd-cmd-params-cm `
   -n argocd `
   --type merge `
-  -p $patch
+  --patch "{\"data\":{\"server.insecure\":\"true\"}}"
 
 Write-Host ""
 Write-Host "=================================="
