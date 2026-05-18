@@ -1,5 +1,3 @@
-# setup.ps1
-
 # Remove cluster antigo (opcional)
 # k3d cluster delete links
 
