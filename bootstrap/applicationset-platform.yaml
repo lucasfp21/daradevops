@@ -24,7 +24,10 @@ spec:
       source:
         repoURL: https://github.com/lucasfp21/daradevops.git
         targetRevision: HEAD
+
         path: '{{path}}'
+        directory:
+          recurse: false
 
       destination:
         server: https://kubernetes.default.svc
