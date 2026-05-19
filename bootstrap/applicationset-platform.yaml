@@ -11,12 +11,12 @@ spec:
         repoURL: https://github.com/lucasfp21/daradevops.git
         revision: HEAD
 
-        directories:
-          - path: platform/*
+        files:
+          - path: "platform/**/app.yaml"
 
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path.basenameNormalized}}'
 
     spec:
       project: default
@@ -24,7 +24,7 @@ spec:
       source:
         repoURL: https://github.com/lucasfp21/daradevops.git
         targetRevision: HEAD
-        path: '{{path}}/application'
+        path: '{{path.path}}'
 
       destination:
         server: https://kubernetes.default.svc

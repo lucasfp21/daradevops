@@ -15,7 +15,7 @@ spec:
 
       helm:
         valueFiles:
-          - $values/platform/monitoring/helm/values.yaml
+          - $values/platform/monitoring/values.yaml
 
     - repoURL: https://github.com/lucasfp21/daradevops.git
       targetRevision: HEAD
