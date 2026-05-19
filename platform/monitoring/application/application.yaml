@@ -18,6 +18,14 @@ spec:
         - $values/platform/monitoring/helm/values.yaml
 
   sources:
+    - repoURL: https://prometheus-community.github.io/helm-charts
+      chart: kube-prometheus-stack
+      targetRevision: 69.5.2
+
+      helm:
+        valueFiles:
+          - $values/platform/monitoring/helm/values.yaml
+
     - repoURL: https://github.com/lucasfp21/daradevops.git
       targetRevision: HEAD
       ref: values
