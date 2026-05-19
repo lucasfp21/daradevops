@@ -2,14 +2,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 
 metadata:
-  name: grafana
-  namespace: monitoring
+  name: traefik-dashboard
+  namespace: kube-system
 
 spec:
   ingressClassName: traefik
 
   rules:
-    - host: grafana.local
+    - host: traefik.local
 
       http:
         paths:
@@ -19,7 +19,6 @@ spec:
 
             backend:
               service:
-                name: monitoring-grafana
-
+                name: traefik
                 port:
-                  number: 80
+                  number: 9000

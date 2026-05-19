@@ -10,12 +10,16 @@ spec:
 
   rules:
     - host: prometheus.local
+
       http:
         paths:
           - path: /
+
             pathType: Prefix
+
             backend:
               service:
                 name: monitoring-kube-prometheus-prometheus
+
                 port:
                   number: 9090
