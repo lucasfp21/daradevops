@@ -1,14 +1,17 @@
 grafana:
-  adminUser: admin
-
   adminPassword: admin123
 
-  service:
-    type: ClusterIP
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+
+    hosts:
+      - grafana.local
 
 prometheus:
-  prometheusSpec:
-    retention: 7d
+  ingress:
+    enabled: true
+    ingressClassName: traefik
 
-alertmanager:
-  enabled: false
+    hosts:
+      - prometheus.local

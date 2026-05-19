@@ -12,11 +12,11 @@ spec:
         revision: HEAD
 
         directories:
-          - path: platform/*
+          - path: platform/*/application
 
   template:
     metadata:
-      name: '{{path.basename}}'
+      name: '{{path[1]}}'
 
     spec:
       project: default
@@ -24,7 +24,7 @@ spec:
       source:
         repoURL: https://github.com/lucasfp21/daradevops.git
         targetRevision: HEAD
-        path: '{{path}}/k8s'
+        path: '{{path}}'
 
       destination:
         server: https://kubernetes.default.svc
