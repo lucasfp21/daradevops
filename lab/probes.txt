@@ -1,0 +1,88 @@
+kubectl describe pod/nginx-probes-6dccbf6cb9-2bnb9 -n probes-lab
+Name:             nginx-probes-6dccbf6cb9-2bnb9
+Namespace:        probes-lab
+Priority:         0
+Service Account:  default
+Node:             k3d-probes-lab-server-0/172.19.0.3
+Start Time:       Tue, 19 May 2026 14:57:04 -0300
+Labels:           app=nginx-probes
+                  pod-template-hash=6dccbf6cb9
+Annotations:      <none>
+Status:           Running
+IP:               10.42.1.6
+IPs:
+  IP:           10.42.1.6
+Controlled By:  ReplicaSet/nginx-probes-6dccbf6cb9
+Containers:
+  nginx:
+    Container ID:   containerd://d9b3a92454c8f05afdbec60abf586c1e004d5f6cc993a27c2a78f021808219ce
+    Image:          nginx:1.25
+    Image ID:       docker.io/library/nginx@sha256:a484819eb60211f5299034ac80f6a681b06f89e65866ce91f356ed7c72af059c
+    Port:           80/TCP
+    Host Port:      0/TCP
+    State:          Running
+      Started:      Tue, 19 May 2026 14:57:13 -0300
+    Ready:          True
+    Restart Count:  0
+    Liveness:       http-get http://:80/ delay=5s timeout=1s period=10s #success=1 #failure=3
+    Readiness:      http-get http://:80/ delay=2s timeout=1s period=5s #success=1 #failure=3
+    Startup:        http-get http://:80/ delay=0s timeout=1s period=3s #success=1 #failure=10
+    Environment:    <none>
+    Mounts:
+      /var/run/secrets/kubernetes.io/serviceaccount from kube-api-access-8cnz8 (ro)
+Conditions:
+  Type                        Status
+  PodReadyToStartContainers   True 
+  Initialized                 True 
+  Ready                       True 
+  ContainersReady             True 
+  PodScheduled                True 
+Volumes:
+  kube-api-access-8cnz8:
+    Type:                    Projected (a volume that contains injected data from multiple sources)
+    TokenExpirationSeconds:  3607
+    ConfigMapName:           kube-root-ca.crt
+    Optional:                false
+    DownwardAPI:             true
+QoS Class:                   BestEffort
+Node-Selectors:              <none>
+Tolerations:                 node.kubernetes.io/not-ready:NoExecute op=Exists for 300s
+                             node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
+Events:
+  Type    Reason     Age    From               Message
+  ----    ------     ----   ----               -------
+  Normal  Scheduled  4m54s  default-scheduler  Successfully assigned probes-lab/nginx-probes-6dccbf6cb9-2bnb9 to k3d-probes-lab-server-0
+  Normal  Pulling    4m54s  kubelet            spec.containers{nginx}: Pulling image "nginx:1.25"
+  Normal  Pulled     4m45s  kubelet            spec.containers{nginx}: Successfully pulled image "nginx:1.25" in 8.98s (8.98s including waiting). Image size: 71005258 bytes.
+  Normal  Created    4m45s  kubelet            spec.containers{nginx}: Created container nginx
+  Normal  Started    4m45s  kubelet            spec.containers{nginx}: Started container nginx
+PS C:\Users\lucas\Documents\Classroom\daradevops> 
+
+
+---
+
+
+removi o index.html do /usr/share/nginx/html
+
+Events:
+  Type     Reason     Age                  From               Message
+  ----     ------     ----                 ----               -------
+  Normal   Scheduled  10m                  default-scheduler  Successfully assigned probes-lab/nginx-probes-6dccbf6cb9-2bnb9 to k3d-probes-lab-server-0
+  Normal   Pulling    10m                  kubelet            spec.containers{nginx}: Pulling image "nginx:1.25"
+  Normal   Pulled     10m                  kubelet            spec.containers{nginx}: Successfully pulled image "nginx:1.25" in 8.98s (8.98s including waiting). Image size: 71005258 bytes.
+  Normal   Created    103s (x2 over 10m)   kubelet            spec.containers{nginx}: Created container nginx
+  Normal   Started    103s (x2 over 10m)   kubelet            spec.containers{nginx}: Started container nginx
+  Warning  Unhealthy  103s (x8 over 2m8s)  kubelet            spec.containers{nginx}: Readiness probe failed: HTTP probe failed with statuscode: 403
+  Warning  Unhealthy  103s (x3 over 2m3s)  kubelet            spec.containers{nginx}: Liveness probe failed: HTTP probe failed with statuscode: 403
+  Normal   Killing    103s                 kubelet            spec.containers{nginx}: Container nginx failed liveness probe, will be restarted
+  Normal   Pulled     103s                 kubelet            spec.containers{nginx}: Container image "nginx:1.25" already present on machine
+PS C:\Users\lucas\Documents\Classroom\daradevops> kubectl get pod -n probes-lab                                   
+NAME                            READY   STATUS    RESTARTS        AGE
+nginx-probes-6dccbf6cb9-2bnb9   1/1     Running   1 (2m18s ago)   10m
+PS C:\Users\lucas\Documents\Classroom\daradevops> kubectl get endpoints -n probes-lab nginx-service               
+NAME            ENDPOINTS      AGE
+nginx-service   10.42.1.6:80   10m
+
+---
+
+voltei o index.html
